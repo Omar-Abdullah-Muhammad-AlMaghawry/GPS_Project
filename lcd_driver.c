@@ -42,16 +42,29 @@ void lcd_init(){
 	GPIOD->DEN |= 0xFF;
 	
 	//LCD initialisation sequence
-	
+	lcd_cmd(0x38); //Use LCD 8-bit mode
+	lcd_cmd(0x03); //Start LCD and initialize cursor location
+	lcd_cmd(0x06); //Enable Automatic shifting right of the cursor when typing
+	lcd_cmd(0x0F); //Turn on LCD display
 }
 
 //used to display a single character in the next digit on the lcd
-void lcd_write(){
+void lcd_write(char *str){
+	char i;
+	for(i = 0; str[i] != 0; i++){
+		lcd_write_char(str[i]);
+	}
+}
+
+void lcd_select_line(uint8_t line){
+	if(line == 1) lcd_cmd(0x80);
+	else if(line == 2) lcd_cmd(0xC0);
 }
 
 int main(){
-	lcd_init();
+	
 }
 void SystemInit(){
+	lcd_init();
 	main();
 }
