@@ -7,17 +7,36 @@ D:\College\3rd CSE\Microprocessors Based Systems\GPS_Project\GPS_Project.uvproj
 Project File Date:  05/25/2021
 
 <h2>Output:</h2>
-Rebuild target 'Target 1'
-assembling startup_TM4C123.s...
+Build target 'Target 1'
 compiling lcd_driver.c...
 linking...
-Program Size: Code=892 RO-data=636 RW-data=0 ZI-data=608  
+Program Size: Code=984 RO-data=636 RW-data=0 ZI-data=608  
 ".\GPS_Project.axf" - 0 Error(s), 0 Warning(s).
-compiling lcd_driver.c...
-"lcd_driver.c" - 0 Error(s), 0 Warning(s).
-ver.c(53): error:  #20: identifier "i" is undefined
-        for(char i = 0; str[i] != 0; i++){
-lcd_driver.c: 0 warnings, 2 errors
-"lcd_driver.c" - 2 Error(s), 0 Warning(s).
-compiling lcd_driver.c...
-"lcd_driver.c" - 0 Error(s), 0 Warning(s).
+ 1 warning, 0 errors
+assembling startup_TM4C123.s...
+linking...
+Program Size: Code=984 RO-data=636 RW-data=0 ZI-data=608  
+".\GPS_Project.axf" - 0 Error(s), 1 Warning(s).
+information to list image symbols.
+Finished: 1 information, 0 warning and 1 error messages.
+".\GPS_Project.axf" - 1 Error(s), 1 Warning(s).
+Target not created
+f" - 1 Error(s), 2 Warning(s).
+Target not created
+PIOB" is undefined
+        GPIOB->DATA = digit;
+lcd_driver.c(37): error:  #20: identifier "SYSCTL" is undefined
+        SYSCTL->RCGCGPIO |= 0x12;
+lcd_driver.c(39): error:  #20: identifier "GPIOE" is undefined
+        GPIOE->AMSEL &= 0x00; //using E as control output
+lcd_driver.c(44): error:  #20: identifier "GPIOB" is undefined
+        GPIOB->AMSEL &= 0x00; //using B as LCD data output
+lcd_driver.c(67): error:  #20: identifier "uint8_t" is undefined
+  void lcd_select_line(uint8_t line){
+lcd_driver.c: 1 warning, 9 errors
+".\GPS_Project.axf" - 9 Error(s), 1 Warning(s).
+Target not created
+e ends without a newline
+  }
+gps_driver.c: 1 warning, 0 errors
+"gps_driver.c" - 0 Error(s), 1 Warning(s).
