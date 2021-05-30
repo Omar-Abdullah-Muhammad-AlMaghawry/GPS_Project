@@ -4,11 +4,14 @@ NAME: INIT UART for gbs
 Description : initialization the UART
 */  
 void UART_init(UartConfig * conf){
-//uint8_t BRD = BRDI + BRDF = UARTSysClk / (ClkDiv * Baud Rate) 
+	int UARTSysClk = 16000000;
+	int ClkDiv =16;
+	uint8_t BRD = UARTSysClk / (ClkDiv * conf->baudRate);
+	int IBRD = BRD;
+	int FBRD = ( (BRD-IBRD)* 64 + 0.5);
 	SYSCTL_RCGCGPIO_R |=(1<<conf->gpioPort); // enable portd
 	//while((SYSCTL_PRGPIO_R&(1<<conf->gpioPort))==0);
 	SYSCTL_RCGCUART_R |= (1<<(conf->uartType)); // enable uart2
-	
 	switch (conf->uartType){	
 		
 		case UART0:
@@ -18,8 +21,8 @@ void UART_init(UartConfig * conf){
 			GPIO_PORTA_DEN_R |=(1<<0)|(1<<1); // degit enable for 6 & 7
 			UART0_LCRH_R|=0x70; // 8 bit & fifo enable	
 			UART0_CTL_R |= UART_CTL_RXE | UART_CTL_TXE; // enable tx & rx
-			UART0_IBRD_R =520; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
-			UART0_FBRD_R =53; //float baud rate 0.833333*64 = 53.3333
+			UART0_IBRD_R =IBRD; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
+			UART0_FBRD_R =FBRD; //float baud rate 0.833333*64 = 53.3333
 			UART0_CTL_R |=UART_CTL_UARTEN ; // enable uart 	
 		break;
 		case UART1:
@@ -36,8 +39,8 @@ void UART_init(UartConfig * conf){
 			}
 			UART1_LCRH_R|=0x70; // 8 bit & fifo enable	
 				UART1_CTL_R |= UART_CTL_RXE | UART_CTL_TXE; // enable tx & rx
-				UART1_IBRD_R =520; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
-				UART1_FBRD_R =53; //float baud rate 0.833333*64 = 53.3333
+				UART1_IBRD_R =IBRD; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
+				UART1_FBRD_R =FBRD; //float baud rate 0.833333*64 = 53.3333
 				UART1_CTL_R |=UART_CTL_UARTEN ; // enable uart 	
 			break;
 		case UART2:
@@ -47,8 +50,8 @@ void UART_init(UartConfig * conf){
 				GPIO_PORTD_DEN_R |=(1<<6)|(1<<7); // degit enable for 6 & 7
 				UART2_LCRH_R|=0x70; // 8 bit & fifo enable	
 				UART2_CTL_R |= UART_CTL_RXE | UART_CTL_TXE; // enable tx & rx
-				UART2_IBRD_R =520; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
-				UART2_FBRD_R =53; //float baud rate 0.833333*64 = 53.3333
+				UART2_IBRD_R =IBRD; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
+				UART2_FBRD_R =FBRD; //float baud rate 0.833333*64 = 53.3333
 				UART2_CTL_R |=UART_CTL_UARTEN ; // enable uart 	
 			break;
 		case UART3:
@@ -58,8 +61,8 @@ void UART_init(UartConfig * conf){
 				GPIO_PORTC_DEN_R |=(1<<6)|(1<<7); // degit enable for 6 & 7
 				UART3_LCRH_R|=0x70; // 8 bit & fifo enable	
 				UART3_CTL_R |= UART_CTL_RXE | UART_CTL_TXE; // enable tx & rx
-				UART3_IBRD_R =520; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
-				UART3_FBRD_R =53; //float baud rate 0.833333*64 = 53.3333
+				UART3_IBRD_R =IBRD; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
+				UART3_FBRD_R =FBRD; //float baud rate 0.833333*64 = 53.3333
 				UART3_CTL_R |=UART_CTL_UARTEN ; // enable uart 	
 			break;
 		case UART4:
@@ -69,8 +72,8 @@ void UART_init(UartConfig * conf){
 			GPIO_PORTC_DEN_R |=(1<<4)|(1<<5); // degit enable for 6 & 7
 			UART4_LCRH_R|=0x70; // 8 bit & fifo enable	
 			UART4_CTL_R |= UART_CTL_RXE | UART_CTL_TXE; // enable tx & rx
-			UART4_IBRD_R =520; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
-			UART4_FBRD_R =53; //float baud rate 0.833333*64 = 53.3333
+			UART4_IBRD_R =IBRD; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
+			UART4_FBRD_R =FBRD; //float baud rate 0.833333*64 = 53.3333
 			UART4_CTL_R |=UART_CTL_UARTEN ; // enable uart 				
 			break;
 		case UART5:
@@ -80,8 +83,8 @@ void UART_init(UartConfig * conf){
 				GPIO_PORTE_DEN_R |=(1<<4)|(1<<5); // degit enable for 6 & 7
 				UART5_LCRH_R|=0x70; // 8 bit & fifo enable	
 				UART5_CTL_R |= UART_CTL_RXE | UART_CTL_TXE; // enable tx & rx
-				UART5_IBRD_R =520; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
-				UART5_FBRD_R =53; //float baud rate 0.833333*64 = 53.3333
+				UART5_IBRD_R =IBRD; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
+				UART5_FBRD_R =FBRD; //float baud rate 0.833333*64 = 53.3333
 				UART5_CTL_R |=UART_CTL_UARTEN ; // enable uart 	
 			break;			
 		case UART6:
@@ -91,8 +94,8 @@ void UART_init(UartConfig * conf){
 				GPIO_PORTD_DEN_R |=(1<<4)|(1<<5); // degit enable for 6 & 7
 				UART6_LCRH_R|=0x70; // 8 bit & fifo enable	
 				UART6_CTL_R |= UART_CTL_RXE | UART_CTL_TXE; // enable tx & rx
-				UART6_IBRD_R =520; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
-				UART6_FBRD_R =53; //float baud rate 0.833333*64 = 53.3333
+				UART6_IBRD_R =IBRD; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
+				UART6_FBRD_R =FBRD; //float baud rate 0.833333*64 = 53.3333
 				UART6_CTL_R |=UART_CTL_UARTEN ; // enable uart 		
 			break;
 		case UART7:
@@ -102,8 +105,8 @@ void UART_init(UartConfig * conf){
 				GPIO_PORTE_DEN_R |=(1<<1)|(1<<0); // degit enable for 6 & 7
 				UART7_LCRH_R|=0x70; // 8 bit & fifo enable	
 				UART7_CTL_R |= UART_CTL_RXE | UART_CTL_TXE; // enable tx & rx
-				UART7_IBRD_R =520; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
-				UART7_FBRD_R =53; //float baud rate 0.833333*64 = 53.3333
+				UART7_IBRD_R =IBRD; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
+				UART7_FBRD_R =FBRD; //float baud rate 0.833333*64 = 53.3333
 				UART7_CTL_R |=UART_CTL_UARTEN ; // enable uart 	
 			break;
 		default: 

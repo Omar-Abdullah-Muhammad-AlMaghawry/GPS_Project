@@ -6,11 +6,7 @@ void SystemInit(){
 int main(void){
 uint8_t test=0;
 UartConfig testUart ={UART0,PORTA,1,8,9600};
-lcd_init();
-lcd_
-
 UART_init(&testUart); 	
-
 while(1){	
 test =UART_recieve(&testUart);
 
