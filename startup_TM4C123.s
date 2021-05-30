@@ -248,13 +248,12 @@ NMI_Handler     PROC
 HardFault_Handler\
                 PROC
                 EXPORT  HardFault_Handler         [WEAK]
-
-
+            ;    B       .
                 ENDP
 MemManage_Handler\
                 PROC
                 EXPORT  MemManage_Handler         [WEAK]
-
+                B       .
                 ENDP
 BusFault_Handler\
                 PROC
@@ -947,8 +946,8 @@ PWM1_FAULT_Handler\
 
                 ELSE
 
-                IMPORT  __use_two_region_memory
-                EXPORT  __user_initial_stackheap
+              ;  IMPORT  __use_two_region_memory
+               EXPORT  __user_initial_stackheap
 __user_initial_stackheap
 
                 LDR     R0, =  Heap_Mem
