@@ -1,33 +1,153 @@
 #include "uart.h"
-
-
 /*
-NAME: INIT UART
+NAME: INIT UART for gbs
 Description : initialization the UART
 */  
-void UART_init(void){
-#if UARTTYPE == 0	
-SYSCTL_RCGCUART_R |= SYSCTL_RCGCUART_R0;
-SYSCTL_RCGCGPIO_R |=SYSCTL_RCGCGPIO_R0;
-//while((SYSCTL_PRGPIO_R&SYSCTL_PRGPIO_R0)==0){};
-GPIO_PORTA_AFSEL_R |= GPIO_PCTL_PA0_U0RX|GPIO_PCTL_PA1_U0TX;
-GPIO_PORTA_DEN_R |=(1<<0)|(1<<1);
-GPIO_PORTA_DIR_R |=(1<<0)|(1<<1) ;
-UART0_CTL_R |=UART_CTL_UARTEN |UART_CTL_RXE|UART_CTL_TXE; 
-//UART0_DR_R = ;
-//UART0_FR_R = ;
-//UART2
-#elif UARTTYPE == 2
-SYSCTL_RCGCUART_R |= SYSCTL_RCGCUART_R2;
-SYSCTL_RCGCGPIO_R |=SYSCTL_RCGCGPIO_R3;
-//while((SYSCTL_PRGPIO_R&SYSCTL_PRGPIO_R2)==0){};
-GPIO_PORTD_AFSEL_R |= GPIO_PCTL_PD6_U2RX|GPIO_PCTL_PD7_U2TX;
-GPIO_PORTD_DEN_R |=(1<<6)|(1<<7);
-GPIO_PORTD_DIR_R |=(1<<6)|(1<<7) ;
-UART2_CTL_R |=UART_CTL_UARTEN |UART_CTL_RXE|UART_CTL_TXE; 
-//UART0_DR_R = ;
-//UART0_FR_R = ;
-#endif
+void UART_init(UartConfig * conf){
+//uint8_t BRD = BRDI + BRDF = UARTSysClk / (ClkDiv * Baud Rate) 
+	SYSCTL_RCGCGPIO_R |=(1<<conf->gpioPort); // enable portd
+	//while((SYSCTL_PRGPIO_R&(1<<conf->gpioPort))==0);
+	SYSCTL_RCGCUART_R |= (1<<(conf->uartType)); // enable uart2
+	
+	switch (conf->uartType){	
+		
+		case UART0:
+			UART0_CTL_R &=~UART_CTL_UARTEN; // denable
+			GPIO_PORTA_AFSEL_R |= (1<<0)|(1<<1);//GPIO_PCTL_PD6_U2RX|GPIO_PCTL_PD7_U2TX;
+			GPIO_PORTA_PCTL_R = (GPIO_PORTA_PCTL_R&0xFFFFFF00)+0x00000011; //choose alternative fn as U2Rx &U2Tx
+			GPIO_PORTA_DEN_R |=(1<<0)|(1<<1); // degit enable for 6 & 7
+			UART0_LCRH_R|=0x70; // 8 bit & fifo enable	
+			UART0_CTL_R |= UART_CTL_RXE | UART_CTL_TXE; // enable tx & rx
+			UART0_IBRD_R =520; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
+			UART0_FBRD_R =53; //float baud rate 0.833333*64 = 53.3333
+			UART0_CTL_R |=UART_CTL_UARTEN ; // enable uart 	
+		break;
+		case UART1:
+				UART1_CTL_R &=~UART_CTL_UARTEN; // denable			
+			if(conf->gpioPort == 1){
+				GPIO_PORTB_AFSEL_R |= (1<<0)|(1<<1);//GPIO_PCTL_PD6_U2RX|GPIO_PCTL_PD7_U2TX;
+				GPIO_PORTB_PCTL_R = (GPIO_PORTB_PCTL_R&0xFFFFFF00)+0x00000011; //choose alternative fn as U2Rx &U2Tx
+				GPIO_PORTB_DEN_R |=(1<<0)|(1<<1); // degit enable for 6 & 7
+			}
+			else if(conf->gpioPort == 2){
+				GPIO_PORTC_AFSEL_R |= (1<<0)|(1<<1);//GPIO_PCTL_PD6_U2RX|GPIO_PCTL_PD7_U2TX;
+				GPIO_PORTC_PCTL_R = (GPIO_PORTC_PCTL_R&0xFF00FFFF)+0x00110000; //choose alternative fn as U2Rx &U2Tx
+				GPIO_PORTC_DEN_R |=(1<<1)|(1<<0); // degit enable for 6 & 7
+			}
+			UART1_LCRH_R|=0x70; // 8 bit & fifo enable	
+				UART1_CTL_R |= UART_CTL_RXE | UART_CTL_TXE; // enable tx & rx
+				UART1_IBRD_R =520; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
+				UART1_FBRD_R =53; //float baud rate 0.833333*64 = 53.3333
+				UART1_CTL_R |=UART_CTL_UARTEN ; // enable uart 	
+			break;
+		case UART2:
+				UART2_CTL_R &=~UART_CTL_UARTEN; // denable			
+				GPIO_PORTD_AFSEL_R |= (1<<6)|(1<<7);//GPIO_PCTL_PD6_U2RX|GPIO_PCTL_PD7_U2TX;
+				GPIO_PORTD_PCTL_R = (GPIO_PORTD_PCTL_R&0x00FFFFFF)+0x11000000; //choose alternative fn as U2Rx &U2Tx
+				GPIO_PORTD_DEN_R |=(1<<6)|(1<<7); // degit enable for 6 & 7
+				UART2_LCRH_R|=0x70; // 8 bit & fifo enable	
+				UART2_CTL_R |= UART_CTL_RXE | UART_CTL_TXE; // enable tx & rx
+				UART2_IBRD_R =520; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
+				UART2_FBRD_R =53; //float baud rate 0.833333*64 = 53.3333
+				UART2_CTL_R |=UART_CTL_UARTEN ; // enable uart 	
+			break;
+		case UART3:
+				UART3_CTL_R &=~UART_CTL_UARTEN; // denable		
+				GPIO_PORTC_AFSEL_R |= (1<<6)|(1<<7);//GPIO_PCTL_PD6_U2RX|GPIO_PCTL_PD7_U2TX;
+				GPIO_PORTC_PCTL_R = (GPIO_PORTC_PCTL_R&0x00FFFFFF)+0x11000000; //choose alternative fn as U2Rx &U2Tx
+				GPIO_PORTC_DEN_R |=(1<<6)|(1<<7); // degit enable for 6 & 7
+				UART3_LCRH_R|=0x70; // 8 bit & fifo enable	
+				UART3_CTL_R |= UART_CTL_RXE | UART_CTL_TXE; // enable tx & rx
+				UART3_IBRD_R =520; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
+				UART3_FBRD_R =53; //float baud rate 0.833333*64 = 53.3333
+				UART3_CTL_R |=UART_CTL_UARTEN ; // enable uart 	
+			break;
+		case UART4:
+			UART4_CTL_R &=~UART_CTL_UARTEN; // denable	
+			GPIO_PORTC_AFSEL_R |= (1<<5)|(1<<4);//GPIO_PCTL_PD6_U2RX|GPIO_PCTL_PD7_U2TX;
+			GPIO_PORTC_PCTL_R = (GPIO_PORTC_PCTL_R&0xFF00FFFF)+0x00110000; //choose alternative fn as U2Rx &U2Tx
+			GPIO_PORTC_DEN_R |=(1<<4)|(1<<5); // degit enable for 6 & 7
+			UART4_LCRH_R|=0x70; // 8 bit & fifo enable	
+			UART4_CTL_R |= UART_CTL_RXE | UART_CTL_TXE; // enable tx & rx
+			UART4_IBRD_R =520; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
+			UART4_FBRD_R =53; //float baud rate 0.833333*64 = 53.3333
+			UART4_CTL_R |=UART_CTL_UARTEN ; // enable uart 				
+			break;
+		case UART5:
+				UART5_CTL_R &=~UART_CTL_UARTEN; // denable
+				GPIO_PORTE_AFSEL_R |= (1<<4)|(1<<5);//GPIO_PCTL_PD6_U2RX|GPIO_PCTL_PD7_U2TX;
+				GPIO_PORTE_PCTL_R = (GPIO_PORTE_PCTL_R&0xFF00FFFF)+0x00110000; //choose alternative fn as U2Rx &U2Tx
+				GPIO_PORTE_DEN_R |=(1<<4)|(1<<5); // degit enable for 6 & 7
+				UART5_LCRH_R|=0x70; // 8 bit & fifo enable	
+				UART5_CTL_R |= UART_CTL_RXE | UART_CTL_TXE; // enable tx & rx
+				UART5_IBRD_R =520; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
+				UART5_FBRD_R =53; //float baud rate 0.833333*64 = 53.3333
+				UART5_CTL_R |=UART_CTL_UARTEN ; // enable uart 	
+			break;			
+		case UART6:
+				UART6_CTL_R &=~UART_CTL_UARTEN; // denable		
+				GPIO_PORTD_AFSEL_R |= (1<<4)|(1<<5);//GPIO_PCTL_PD6_U2RX|GPIO_PCTL_PD7_U2TX;
+				GPIO_PORTD_PCTL_R = (GPIO_PORTD_PCTL_R&0xFF00FFFF)+0x00110000; //choose alternative fn as U2Rx &U2Tx
+				GPIO_PORTD_DEN_R |=(1<<4)|(1<<5); // degit enable for 6 & 7
+				UART6_LCRH_R|=0x70; // 8 bit & fifo enable	
+				UART6_CTL_R |= UART_CTL_RXE | UART_CTL_TXE; // enable tx & rx
+				UART6_IBRD_R =520; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
+				UART6_FBRD_R =53; //float baud rate 0.833333*64 = 53.3333
+				UART6_CTL_R |=UART_CTL_UARTEN ; // enable uart 		
+			break;
+		case UART7:
+				UART7_CTL_R &=~UART_CTL_UARTEN; // denable		
+				GPIO_PORTE_AFSEL_R |= (1<<0)|(1<<1);//GPIO_PCTL_PD6_U2RX|GPIO_PCTL_PD7_U2TX;
+				GPIO_PORTE_PCTL_R = (GPIO_PORTE_PCTL_R&0xFFFFFF00)+0x00000011; //choose alternative fn as U2Rx &U2Tx
+				GPIO_PORTE_DEN_R |=(1<<1)|(1<<0); // degit enable for 6 & 7
+				UART7_LCRH_R|=0x70; // 8 bit & fifo enable	
+				UART7_CTL_R |= UART_CTL_RXE | UART_CTL_TXE; // enable tx & rx
+				UART7_IBRD_R =520; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
+				UART7_FBRD_R =53; //float baud rate 0.833333*64 = 53.3333
+				UART7_CTL_R |=UART_CTL_UARTEN ; // enable uart 	
+			break;
+		default: 
+			break;
+	} 
+/*#if 0 
+	switch (conf->gpioPort){
+	case PORTA:
+			GPIO_PORTA_AFSEL_R |= (1<<6)|(1<<7);//GPIO_PCTL_PD6_U2RX|GPIO_PCTL_PD7_U2TX;
+			GPIO_PORTA_PCTL_R = (GPIO_PORTA_PCTL_R&0xFFFFFF00)+0x00000011; //choose alternative fn as U2Rx &U2Tx
+			GPIO_PORTA_DEN_R |=(1<<6)|(1<<7); // degit enable for 6 & 7
+		break;
+	case PORTB:
+			GPIO_PORTB_AFSEL_R |= (1<<6)|(1<<7);//GPIO_PCTL_PD6_U2RX|GPIO_PCTL_PD7_U2TX;
+			GPIO_PORTB_PCTL_R = (GPIO_PORTB_PCTL_R&0xFFFFFF00)+0x00000011;; //choose alternative fn as U2Rx &U2Tx
+			GPIO_PORTB_DEN_R |=(1<<6)|(1<<7); // degit enable for 6 & 7
+		break;
+	case PORTC:
+			GPIO_PORTC_AFSEL_R |= (1<<6)|(1<<7);//GPIO_PCTL_PD6_U2RX|GPIO_PCTL_PD7_U2TX;
+			GPIO_PORTC_PCTL_R = (GPIO_PORTC_PCTL_R&0xFF00FFFF)+0x11000000; //choose alternative fn as U2Rx &U2Tx
+			GPIO_PORTC_DEN_R |=(1<<6)|(1<<7); // degit enable for 6 & 7
+		break;
+	case PORTD:
+			GPIO_PORTD_AFSEL_R |= (1<<6)|(1<<7);//GPIO_PCTL_PD6_U2RX|GPIO_PCTL_PD7_U2TX;
+			GPIO_PORTD_PCTL_R = (GPIO_PORTD_PCTL_R&0x00FFFFFF)+0x11000000; //choose alternative fn as U2Rx &U2Tx
+			GPIO_PORTD_DEN_R |=(1<<6)|(1<<7); // degit enable for 6 & 7
+		break;
+	case PORTE:
+			GPIO_PORTE_AFSEL_R |= (1<<6)|(1<<7);//GPIO_PCTL_PD6_U2RX|GPIO_PCTL_PD7_U2TX;
+			GPIO_PORTE_PCTL_R = (GPIO_PORTD_PCTL_R&0x00FFFFFF)+0x11000000; //choose alternative fn as U2Rx &U2Tx
+			GPIO_PORTE_DEN_R |=(1<<6)|(1<<7); // degit enable for 6 & 7
+		break;
+	case PORTF:
+			GPIO_PORTF_AFSEL_R |= (1<<6)|(1<<7);//GPIO_PCTL_PD6_U2RX|GPIO_PCTL_PD7_U2TX;
+			GPIO_PORTF_PCTL_R = (GPIO_PORTD_PCTL_R&0x00FFFFFF)+0x11000000; //choose alternative fn as U2Rx &U2Tx
+			GPIO_PORTF_DEN_R |=(1<<6)|(1<<7); // degit enable for 6 & 7
+		break;
+
+}	 
+#endif 
+	//GPIO_PORTD_DIR_R |=(1<<6)|(1<<7);
+	*/
+//p * aux
+//unified program
 }
 
 /*
@@ -37,16 +157,44 @@ in : null
 out : uint8_t // Byte
 */
 
-uint8_t UART_recieve(void){
-#if UARTTYPE == 0
-while((UART0_FR_R&UART_FR_RXFE) !=0){}
-	return UART0_DR_R&(0xFF);
-#elif UARTTYPE == 2
+uint8_t UART_recieve(UartConfig * conf){
+		switch (conf->uartType){	
+		
+		case UART0:
+		while((UART0_FR_R&UART_FR_RXFE) !=0){}
+		return UART0_DR_R&(0xFF);
+	break;
+		case UART1:
+while((UART1_FR_R&UART_FR_RXFE) !=0){}
+	return UART1_DR_R&(0xFF);
+	break;
+
+case UART2:
 while((UART2_FR_R&UART_FR_RXFE) !=0){}
 	return UART2_DR_R&(0xFF);
-#endif
+	break;
+case UART3:
+while((UART3_FR_R&UART_FR_RXFE) !=0){}
+	return UART3_DR_R&(0xFF);
+	break;
+	case UART4:
+while((UART4_FR_R&UART_FR_RXFE) !=0){}
+	return UART4_DR_R&(0xFF);
+	break;
+	case UART5:
+while((UART5_FR_R&UART_FR_RXFE) !=0){}
+	return UART5_DR_R&(0xFF);
+	break;		
+		case UART6:
+while((UART6_FR_R&UART_FR_RXFE) !=0){}
+	return UART6_DR_R&(0xFF);
+	break;case UART7:
+while((UART7_FR_R&UART_FR_RXFE) !=0){}
+	return UART7_DR_R&(0xFF);
+	break;
+		}
 }
-uint32_t * UART_recieveString(void){
+/*uint32_t * UART_recieveString(void){
  uint8_t data = UART_recieve();
 	uint8_t * ptr = &data;
 	uint32_t * ptrInt32 ;
@@ -56,19 +204,44 @@ uint32_t * UART_recieveString(void){
 	}
 	return ptrInt32; 
 }
-
+*/
 /*
 NAME: sent UART0
 Description : sent byte from the UART0
 in : data // byte
 out : 0
 */
-void UART_sent(uint8_t data){
-#if UARTTYPE == 0
+void UART_sent(uint8_t data,UartConfig * conf){
+	switch (conf->uartType){	
+		
+		case UART0:
 while((UART0_FR_R&UART_FR_TXFF)!=0){}
 	UART0_DR_R=data;
-#elif UARTTYPE == 2
+	break;
+		case UART1:
+while((UART1_FR_R&UART_FR_TXFF)!=0){}
+	UART1_DR_R=data;
+	break;
+
+case UART2:
 while((UART2_FR_R&UART_FR_TXFF)!=0){}
-	UART2_DR_R=data;
-	#endif
+	UART2_DR_R=data;	break;
+case UART3:
+while((UART3_FR_R&UART_FR_TXFF)!=0){}
+	UART3_DR_R=data;	break;
+	case UART4:
+while((UART4_FR_R&UART_FR_TXFF)!=0){}
+	UART4_DR_R=data;	break;
+	case UART5:while((UART5_FR_R&UART_FR_TXFF)!=0){}
+	UART5_DR_R=data;
+	break;		
+		case UART6:
+while((UART6_FR_R&UART_FR_TXFF)!=0){}
+	UART6_DR_R=data;	break;
+		case UART7:
+while((UART7_FR_R&UART_FR_TXFF)!=0){}
+	UART7_DR_R=data;	
+	break;
+		}
+
 }

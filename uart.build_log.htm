@@ -4,39 +4,60 @@
 <h1>µVision Build Log</h1>
 <h2>Project:</h2>
 D:\College\3rd Comp. and Sys\2nd Terms\Microprocessor Based System\micro\testStudy\UART\uart.uvproj
-Project File Date:  05/27/2021
+Project File Date:  05/30/2021
 
 <h2>Output:</h2>
-Build target 'Target 1'
+Rebuild target 'Target 1'
+assembling startup_TM4C123.s...
 compiling uart.c...
-uart.c(104): warning:  #1-D: last line of file ends without a newline
-  #endif
-uart.c: 1 warning, 0 errors
+uart.c(166): warning:  #111-D: statement is unreachable
+        break;
+uart.c(170): warning:  #111-D: statement is unreachable
+        break;
+uart.c(175): warning:  #111-D: statement is unreachable
+        break;
+uart.c(179): warning:  #111-D: statement is unreachable
+        break;
+uart.c(183): warning:  #111-D: statement is unreachable
+        break;
+uart.c(187): warning:  #111-D: statement is unreachable
+        break;          
+uart.c(191): warning:  #111-D: statement is unreachable
+        break;case UART7:
+uart.c(194): warning:  #111-D: statement is unreachable
+        break;
+uart.c(196): warning:  #940-D: missing return statement at end of non-void function "UART_recieve"
+  }
+uart.c: 9 warnings, 0 errors
 compiling main.c...
-main.c(6): warning:  #550-D: variable "test" was set but never used
-  uint8_t test=0;
-main.c: 1 warning, 0 errors
+main.c(7): warning:  #188-D: enumerated type mixed with another type
+  UartConfig testUart ={UART0,PORTA,1,8,9600};
+main.c(7): warning:  #188-D: enumerated type mixed with another type
+  UartConfig testUart ={UART0,PORTA,1,8,9600};
+main.c(14): warning:  #111-D: statement is unreachable
+        return 0 ;
+main.c: 3 warnings, 0 errors
 linking...
-.\uart.axf: Error: L6218E: Undefined symbol UART0_init (referred from main.o).
-Not enough information to list image symbols.
-Finished: 1 information, 0 warning and 1 error messages.
-".\uart.axf" - 1 Error(s), 2 Warning(s).
-Target not created
-nection failed!, error code=&d
-Error: Flash Download failed  -  Target DLL has been cancelled
+Program Size: Code=1960 RO-data=644 RW-data=0 ZI-data=608  
+".\uart.axf" - 0 Error(s), 12 Warning(s).
 Load "D:\\College\\3rd Comp. and Sys\\2nd Terms\\Microprocessor Based System\\micro\\testStudy\\UART\\uart.axf" 
 Connecting: Mode=JTAG, Speed=1000000Hz
-Connection failed!, error code=&d
-Error: Flash Download failed  -  Target DLL has been cancelled
+Erase Done.
+Programming Done.
+Verify OK.
 Load "D:\\College\\3rd Comp. and Sys\\2nd Terms\\Microprocessor Based System\\micro\\testStudy\\UART\\uart.axf" 
 Connecting: Mode=JTAG, Speed=1000000Hz
-Connection failed!, error code=&d
-Error: Flash Download failed  -  Target DLL has been cancelled
-Load "D:\\College\\3rd Comp. and Sys\\2nd Terms\\Microprocessor Based System\\micro\\testStudy\\UART\\uart.axf" 
-Connecting: Mode=JTAG, Speed=1000000Hz
-Connection failed!, error code=&d
-Error: Flash Download failed  -  Target DLL has been cancelled
-Load "D:\\College\\3rd Comp. and Sys\\2nd Terms\\Microprocessor Based System\\micro\\testStudy\\UART\\uart.axf" 
-Connecting: Mode=JTAG, Speed=1000000Hz
-Connection failed!, error code=&d
-Error: Flash Download failed  -  Target DLL has been cancelled
+Erase Done.
+Programming Done.
+Verify OK.
+nreachable
+        break;          
+uart.c(190): warning:  #111-D: statement is unreachable
+        break;case UART7:
+uart.c(193): warning:  #111-D: statement is unreachable
+        break;
+uart.c(195): warning:  #940-D: missing return statement at end of non-void function "UART_recieve"
+  }
+uart.c: 9 warnings, 0 errors
+"uart.c" - 0 Error(s), 9 Warning(s).
+Error: Could not load file 'D:\College\3rd Comp. and Sys\2nd Terms\Microprocessor Based System\micro\testStudy\UART\uart.axf'. Debugger aborted !
