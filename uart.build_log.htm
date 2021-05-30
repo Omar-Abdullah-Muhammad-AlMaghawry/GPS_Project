@@ -7,7 +7,8 @@ D:\College\3rd Comp. and Sys\2nd Terms\Microprocessor Based System\micro\testStu
 Project File Date:  05/30/2021
 
 <h2>Output:</h2>
-Build target 'Target 1'
+Rebuild target 'Target 1'
+assembling startup_TM4C123.s...
 compiling uart.c...
 uart.c(401): warning:  #111-D: statement is unreachable
                         break;
@@ -28,81 +29,11 @@ uart.c(428): warning:  #111-D: statement is unreachable
 uart.c(430): warning:  #940-D: missing return statement at end of non-void function "UART_recieve"
   }
 uart.c: 9 warnings, 0 errors
-linking...
-Program Size: Code=4736 RO-data=644 RW-data=0 ZI-data=608  
-".\uart.axf" - 0 Error(s), 9 Warning(s).
-fUart={UART_0,PORTA,1,8,9600};
-main.c(6): warning:  #188-D: enumerated type mixed with another type
-        UartConfig confUart={UART_0,PORTA,1,8,9600};
-main.c(19): warning:  #111-D: statement is unreachable
+compiling main.c...
+main.c(20): warning:  #111-D: statement is unreachable
         return 0 ;
-main.c: 3 warnings, 0 errors
-assembling startup_TM4C123.s...
+main.c: 1 warning, 0 errors
 compiling lcd_driver.c...
 linking...
-Program Size: Code=3544 RO-data=644 RW-data=0 ZI-data=608  
-".\uart.axf" - 0 Error(s), 12 Warning(s).
-Load "D:\\College\\3rd Comp. and Sys\\2nd Terms\\Microprocessor Based System\\micro\\testStudy\\UART\\uart.axf" 
-Connecting: Mode=JTAG, Speed=1000000Hz
-Erase Done.
-Programming Done.
-Verify OK.
-Load "D:\\College\\3rd Comp. and Sys\\2nd Terms\\Microprocessor Based System\\micro\\testStudy\\UART\\uart.axf" 
-Connecting: Mode=JTAG, Speed=1000000Hz
-Erase Done.
-Programming Done.
-Verify OK.
-1000000Hz
-Connection failed!, error code=&d
-Error: Flash Download failed  -  Target DLL has been cancelled
-Load "D:\\College\\3rd Comp. and Sys\\2nd Terms\\Microprocessor Based System\\micro\\testStudy\\UART\\uart.axf" 
-Connecting: Mode=JTAG, Speed=1000000Hz
-Erase Done.
-Programming Done.
-Verify OK.
- and Sys\2nd Terms\Microprocessor Based System\micro\testStudy\UART\uart.axf'
-Load "D:\\College\\3rd Comp. and Sys\\2nd Terms\\Microprocessor Based System\\micro\\testStudy\\UART\\uart.axf" 
-_____^
-*** error 56: cannot open file
-Error: Flash Download failed  -  Could not load file 'D:\College\3rd Comp. and Sys\2nd Terms\Microprocessor Based System\micro\testStudy\UART\uart.axf'
-ifier "GPIO_PORTB_DEN_R" is undefined
-                                GPIO_PORTB_DEN_R |=(1<<0)|(1<<1); // degit enable for 6 & 7
-uart.c(39): error:  #20: identifier "GPIO_PORTC_AFSEL_R" is undefined
-                                GPIO_PORTC_AFSEL_R |= (1<<0)|(1<<1);//GPIO_PCTL_PD6_U2RX|GPIO_PCTL_PD7_U2TX;
-uart.c(40): error:  #20: identifier "GPIO_PORTC_PCTL_R" is undefined
-                                GPIO_PORTC_PCTL_R = (GPIO_PORTC_PCTL_R&0xFF00FFFF)+0x00110000; //choose alternative fn as U2Rx &U2Tx
-uart.c(41): error:  #20: identifier "GPIO_PORTC_DEN_R" is undefined
-                                GPIO_PORTC_DEN_R |=(1<<1)|(1<<0); // degit enable for 6 & 7
-uart.c(43): error:  #20: identifier "UART1_LCRH_R" is undefined
-                        UART1_LCRH_R|=0x70; // 8 bit & fifo enable      
-uart.c(45): error:  #20: identifier "UART1_IBRD_R" is undefined
-                                UART1_IBRD_R =IBRD; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
-uart.c(46): error:  #20: identifier "UART1_FBRD_R" is undefined
-                                UART1_FBRD_R =FBRD; //float baud rate 0.833333*64 = 53.3333
-uart.c(50): error:  #20: identifier "UART2_CTL_R" is undefined
-                                UART2_CTL_R &=~UART_CTL_UARTEN; // denable                      
-uart.c(51): error:  #20: identifier "GPIO_PORTD_AFSEL_R" is undefined
-                                GPIO_PORTD_AFSEL_R |= (1<<6)|(1<<7);//GPIO_PCTL_PD6_U2RX|GPIO_PCTL_PD7_U2TX;
-uart.c(52): error:  #20: identifier "GPIO_PORTD_PCTL_R" is undefined
-                                GPIO_PORTD_PCTL_R = (GPIO_PORTD_PCTL_R&0x00FFFFFF)+0x11000000; //choose alternative fn as U2Rx &U2Tx
-uart.c(53): error:  #20: identifier "GPIO_PORTD_DEN_R" is undefined
-                                GPIO_PORTD_DEN_R |=(1<<6)|(1<<7); // degit enable for 6 & 7
-uart.c(54): error:  #20: identifier "UART2_LCRH_R" is undefined
-                                UART2_LCRH_R|=0x70; // 8 bit & fifo enable      
-uart.c(56): error:  #20: identifier "UART2_IBRD_R" is undefined
-                                UART2_IBRD_R =IBRD; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
-uart.c(57): error:  #20: identifier "UART2_FBRD_R" is undefined
-                                UART2_FBRD_R =FBRD; //float baud rate 0.833333*64 = 53.3333
-uart.c(61): error:  #20: identifier "UART3_CTL_R" is undefined
-                                UART3_CTL_R &=~UART_CTL_UARTEN; // denable              
-uart.c: 0 warnings, 30 errors
-compiling main.c...
-main.c(6): warning:  #188-D: enumerated type mixed with another type
-        UartConfig testUart ={UART_0,PORTA,1,8,9600};
-main.c(6): warning:  #188-D: enumerated type mixed with another type
-        UartConfig testUart ={UART_0,PORTA,1,8,9600};
-main.c(18): warning:  #111-D: statement is unreachable
-        return 0 ;
-main.c: 3 warnings, 0 errors
-".\uart.axf" - 30 Error(s), 3 Warning(s).
-Target not created
+Program Size: Code=4740 RO-data=644 RW-data=0 ZI-data=608  
+".\uart.axf" - 0 Error(s), 10 Warning(s).

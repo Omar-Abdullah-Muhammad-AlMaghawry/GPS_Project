@@ -3,11 +3,11 @@
 <title>Static Call Graph - [.\uart.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\uart.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Sun May 30 20:26:58 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Sun May 30 22:02:49 2021
 <BR><P>
 <H3>Maximum Stack Usage =         96 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-__rt_entry_main &rArr; main &rArr; UART_init &rArr; __aeabi_d2iz
+SystemInit &rArr; main &rArr; UART_init &rArr; __aeabi_d2iz
 <P>
 <H3>
 Functions with no stack information
@@ -387,41 +387,6 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_exit
 </UL>
 
-<P><STRONG><a name="[8c]"></a>UART_init</STRONG> (Thumb, 2230 bytes, Stack size 48 bytes, uart.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = UART_init &rArr; __aeabi_d2iz
-</UL>
-<BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
-<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2iz
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
-</UL>
-<BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
-
-<P><STRONG><a name="[93]"></a>UART_recieve</STRONG> (Thumb, 186 bytes, Stack size 0 bytes, uart.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
-
-<P><STRONG><a name="[95]"></a>UART_sent</STRONG> (Thumb, 166 bytes, Stack size 0 bytes, uart.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
-
-<P><STRONG><a name="[86]"></a>main</STRONG> (Thumb, 78 bytes, Stack size 16 bytes, main.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = main &rArr; UART_init &rArr; __aeabi_d2iz
-</UL>
-<BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_write_line
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_write_char
-<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_select_line
-<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_init
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_sent
-<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_recieve
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_init
-</UL>
-<BR>[Called By]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
-</UL>
-
-<P><STRONG><a name="[79]"></a>SystemInit</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, main.o(.text))
-<BR>[Address Reference Count : 1]<UL><LI> startup_tm4c123.o(.text)
-</UL>
 <P><STRONG><a name="[7b]"></a>Reset_Handler</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, startup_tm4c123.o(.text))
 
 <P><STRONG><a name="[4]"></a>NMI_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_tm4c123.o(.text))
@@ -1243,9 +1208,49 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
 </UL>
 
+<P><STRONG><a name="[8c]"></a>UART_init</STRONG> (Thumb, 2230 bytes, Stack size 48 bytes, uart.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = UART_init &rArr; __aeabi_d2iz
+</UL>
+<BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2iz
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
+</UL>
+<BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[93]"></a>UART_recieve</STRONG> (Thumb, 186 bytes, Stack size 0 bytes, uart.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[94]"></a>UART_sent</STRONG> (Thumb, 166 bytes, Stack size 0 bytes, uart.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[86]"></a>main</STRONG> (Thumb, 78 bytes, Stack size 16 bytes, main.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = main &rArr; UART_init &rArr; __aeabi_d2iz
+</UL>
+<BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_write_line
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_write_char
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_select_line
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_init
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_sent
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_recieve
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_init
+</UL>
+<BR>[Called By]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
+</UL>
+
+<P><STRONG><a name="[79]"></a>SystemInit</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, main.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = SystemInit &rArr; main &rArr; UART_init &rArr; __aeabi_d2iz
+</UL>
+<BR>[Calls]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_tm4c123.o(.text)
+</UL>
 <P><STRONG><a name="[97]"></a>delay_micro</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, lcd_driver.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_cmd
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_write_char
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_write_char
 </UL>
 
 <P><STRONG><a name="[96]"></a>lcd_cmd</STRONG> (Thumb, 68 bytes, Stack size 8 bytes, lcd_driver.o(.text))
@@ -1257,7 +1262,7 @@ Global Symbols
 <LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_init
 </UL>
 
-<P><STRONG><a name="[94]"></a>lcd_write_char</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, lcd_driver.o(.text))
+<P><STRONG><a name="[95]"></a>lcd_write_char</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, lcd_driver.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = lcd_write_char
 </UL>
 <BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_micro
@@ -1277,7 +1282,7 @@ Global Symbols
 <P><STRONG><a name="[92]"></a>lcd_write_line</STRONG> (Thumb, 28 bytes, Stack size 12 bytes, lcd_driver.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = lcd_write_line &rArr; lcd_write_char
 </UL>
-<BR>[Calls]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_write_char
+<BR>[Calls]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_write_char
 </UL>
 <BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
