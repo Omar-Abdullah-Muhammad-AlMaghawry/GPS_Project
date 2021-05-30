@@ -7,59 +7,65 @@ D:\College\3rd Comp. and Sys\2nd Terms\Microprocessor Based System\micro\testStu
 Project File Date:  05/30/2021
 
 <h2>Output:</h2>
-Rebuild target 'Target 1'
+Build target 'Target 1'
 compiling uart.c...
-uart.c(172): warning:  #111-D: statement is unreachable
+uart.c(401): warning:  #111-D: statement is unreachable
+                        break;
+uart.c(405): warning:  #111-D: statement is unreachable
+                        break;
+uart.c(409): warning:  #111-D: statement is unreachable
+                        break;
+uart.c(413): warning:  #111-D: statement is unreachable
+                        break;
+uart.c(417): warning:  #111-D: statement is unreachable
         break;
-uart.c(176): warning:  #111-D: statement is unreachable
-        break;
-uart.c(181): warning:  #111-D: statement is unreachable
-        break;
-uart.c(185): warning:  #111-D: statement is unreachable
-        break;
-uart.c(189): warning:  #111-D: statement is unreachable
-        break;
-uart.c(193): warning:  #111-D: statement is unreachable
+uart.c(421): warning:  #111-D: statement is unreachable
         break;          
-uart.c(197): warning:  #111-D: statement is unreachable
+uart.c(425): warning:  #111-D: statement is unreachable
         break;case UART_7:
-uart.c(200): warning:  #111-D: statement is unreachable
+uart.c(428): warning:  #111-D: statement is unreachable
         break;
-uart.c(202): warning:  #940-D: missing return statement at end of non-void function "UART_recieve"
+uart.c(430): warning:  #940-D: missing return statement at end of non-void function "UART_recieve"
   }
 uart.c: 9 warnings, 0 errors
-compiling main.c...
+linking...
+Program Size: Code=4736 RO-data=644 RW-data=0 ZI-data=608  
+".\uart.axf" - 0 Error(s), 9 Warning(s).
+fUart={UART_0,PORTA,1,8,9600};
 main.c(6): warning:  #188-D: enumerated type mixed with another type
         UartConfig confUart={UART_0,PORTA,1,8,9600};
-main.c(6): warning:  #188-D: enumerated type mixed with another type
-        UartConfig confUart={UART_0,PORTA,1,8,9600};
-main.c(18): warning:  #111-D: statement is unreachable
+main.c(19): warning:  #111-D: statement is unreachable
         return 0 ;
 main.c: 3 warnings, 0 errors
 assembling startup_TM4C123.s...
+compiling lcd_driver.c...
 linking...
-Program Size: Code=3148 RO-data=644 RW-data=0 ZI-data=608  
+Program Size: Code=3544 RO-data=644 RW-data=0 ZI-data=608  
 ".\uart.axf" - 0 Error(s), 12 Warning(s).
 Load "D:\\College\\3rd Comp. and Sys\\2nd Terms\\Microprocessor Based System\\micro\\testStudy\\UART\\uart.axf" 
 Connecting: Mode=JTAG, Speed=1000000Hz
 Erase Done.
 Programming Done.
 Verify OK.
-dy\\UART\\uart.axf" 
-_____^
-*** error 56: cannot open file
-Error: Flash Download failed  -  Could not load file 'D:\College\3rd Comp. and Sys\2nd Terms\Microprocessor Based System\micro\testStudy\UART\uart.axf'
+Load "D:\\College\\3rd Comp. and Sys\\2nd Terms\\Microprocessor Based System\\micro\\testStudy\\UART\\uart.axf" 
+Connecting: Mode=JTAG, Speed=1000000Hz
+Erase Done.
+Programming Done.
+Verify OK.
+1000000Hz
+Connection failed!, error code=&d
+Error: Flash Download failed  -  Target DLL has been cancelled
+Load "D:\\College\\3rd Comp. and Sys\\2nd Terms\\Microprocessor Based System\\micro\\testStudy\\UART\\uart.axf" 
+Connecting: Mode=JTAG, Speed=1000000Hz
+Erase Done.
+Programming Done.
+Verify OK.
+ and Sys\2nd Terms\Microprocessor Based System\micro\testStudy\UART\uart.axf'
 Load "D:\\College\\3rd Comp. and Sys\\2nd Terms\\Microprocessor Based System\\micro\\testStudy\\UART\\uart.axf" 
 _____^
 *** error 56: cannot open file
 Error: Flash Download failed  -  Could not load file 'D:\College\3rd Comp. and Sys\2nd Terms\Microprocessor Based System\micro\testStudy\UART\uart.axf'
-f" - 0 Error(s), 18 Warning(s).
-           
-uart.c(34): error:  #20: identifier "GPIO_PORTB_AFSEL_R" is undefined
-                                GPIO_PORTB_AFSEL_R |= (1<<0)|(1<<1);//GPIO_PCTL_PD6_U2RX|GPIO_PCTL_PD7_U2TX;
-uart.c(35): error:  #20: identifier "GPIO_PORTB_PCTL_R" is undefined
-                                GPIO_PORTB_PCTL_R = (GPIO_PORTB_PCTL_R&0xFFFFFF00)+0x00000011; //choose alternative fn as U2Rx &U2Tx
-uart.c(36): error:  #20: identifier "GPIO_PORTB_DEN_R" is undefined
+ifier "GPIO_PORTB_DEN_R" is undefined
                                 GPIO_PORTB_DEN_R |=(1<<0)|(1<<1); // degit enable for 6 & 7
 uart.c(39): error:  #20: identifier "GPIO_PORTC_AFSEL_R" is undefined
                                 GPIO_PORTC_AFSEL_R |= (1<<0)|(1<<1);//GPIO_PCTL_PD6_U2RX|GPIO_PCTL_PD7_U2TX;
