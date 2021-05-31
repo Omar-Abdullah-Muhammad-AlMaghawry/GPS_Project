@@ -10,30 +10,55 @@ Project File Date:  05/30/2021
 Rebuild target 'Target 1'
 assembling startup_TM4C123.s...
 compiling uart.c...
+uart.c(377): warning:  #111-D: statement is unreachable
+                                break;
+uart.c(381): warning:  #111-D: statement is unreachable
+                                break;
+uart.c(385): warning:  #111-D: statement is unreachable
+                                break;
+uart.c(389): warning:  #111-D: statement is unreachable
+                                break;
+uart.c(393): warning:  #111-D: statement is unreachable
+                                break;
+uart.c(397): warning:  #111-D: statement is unreachable
+                                break;          
 uart.c(401): warning:  #111-D: statement is unreachable
-                        break;
+                                break;
 uart.c(405): warning:  #111-D: statement is unreachable
-                        break;
-uart.c(409): warning:  #111-D: statement is unreachable
-                        break;
-uart.c(413): warning:  #111-D: statement is unreachable
-                        break;
-uart.c(417): warning:  #111-D: statement is unreachable
-        break;
-uart.c(421): warning:  #111-D: statement is unreachable
-        break;          
-uart.c(425): warning:  #111-D: statement is unreachable
-        break;case UART_7:
-uart.c(428): warning:  #111-D: statement is unreachable
-        break;
-uart.c(430): warning:  #940-D: missing return statement at end of non-void function "UART_recieve"
+                                break;
+uart.c(407): warning:  #940-D: missing return statement at end of non-void function "UART_recieveChar"
   }
 uart.c: 9 warnings, 0 errors
 compiling main.c...
-main.c(20): warning:  #111-D: statement is unreachable
+main.c(30): warning:  #111-D: statement is unreachable
         return 0 ;
-main.c: 1 warning, 0 errors
+main.c(6): warning:  #177-D: variable "testS" was declared but never referenced
+        char testS[5]={0};
+main.c: 2 warnings, 0 errors
 compiling lcd_driver.c...
 linking...
-Program Size: Code=4740 RO-data=644 RW-data=0 ZI-data=608  
-".\uart.axf" - 0 Error(s), 10 Warning(s).
+Program Size: Code=6488 RO-data=660 RW-data=0 ZI-data=608  
+FromELF: creating hex file...
+".\uart.axf" - 0 Error(s), 11 Warning(s).
+Load "D:\\College\\3rd Comp. and Sys\\2nd Terms\\Microprocessor Based System\\micro\\testStudy\\UART\\uart.axf" 
+Connecting: Mode=JTAG, Speed=1000000Hz
+Erase Done.
+Programming Done.
+Verify OK.
+load file 'D:\College\3rd Comp. and Sys\2nd Terms\Microprocessor Based System\micro\testStudy\UART\uart.axf'
+load file 'D:\College\3rd Comp. and Sys\2nd Terms\Microprocessor Based System\micro\testStudy\UART\uart.axf'
+                break;
+uart.c(380): warning:  #111-D: statement is unreachable
+                        break;
+uart.c(384): warning:  #111-D: statement is unreachable
+        break;
+uart.c(388): warning:  #111-D: statement is unreachable
+        break;          
+uart.c(392): warning:  #111-D: statement is unreachable
+        break;
+uart.c(396): warning:  #111-D: statement is unreachable
+        break;
+uart.c(398): warning:  #940-D: missing return statement at end of non-void function "UART_recieve"
+  }
+uart.c: 9 warnings, 0 errors
+"uart.c" - 0 Error(s), 9 Warning(s).

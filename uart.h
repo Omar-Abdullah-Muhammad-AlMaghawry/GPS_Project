@@ -2,6 +2,7 @@
 #define uart
 #include "stdint.h"
 #include "tm4c123gh6pm_O.h"
+#include "tm4c123gh6pm.h"
 #define UARTTYPE 0
 /*extern enum UartType;
 enum GpioPort
@@ -29,8 +30,11 @@ typedef struct {
 extern UartConfig confUart;
 extern	UartConfig * conf; 
 void UART_init(const UartConfig * conf);
-uint8_t UART_recieve(const UartConfig * conf);
-void UART_sent(uint8_t data,const UartConfig * conf);
-uint32_t * UART_recieveString(void);
+uint8_t UART_recieveChar(const UartConfig * conf);
+void UART_sentChar(const UartConfig * conf,uint8_t data);
+//uint8_t * UART_recieveString(const UartConfig * conf,int lenght);
+void UART_recieveString(const UartConfig * conf,char * str,int lenght);
+	void UART_sentString(const UartConfig * conf,char * str);
+//uint32_t * UART_recieveString(void);
 
 #endif
