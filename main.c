@@ -17,10 +17,12 @@ int main(void){
 	SYSTICK_init(); 	
 	lcd_select_line(2);
 	lcd_write_line("f 01");
-
+	SYSTICK_delaySec(5);
+	lcd_select_line(4);
+	lcd_write_line("test");
 	while(1){	
 		test = UART_recieveChar(&confUartGps);
-		SYSTICK_delayMil(15);
+		SYSTICK_delayMil(500);
 		//UART_recieveString(&confUartTermBluetooth, testS,5);
 		//UART_sentChar(&confUartTermUSB,test);
 		UART_sentChar(&confUartTermBluetooth,test);

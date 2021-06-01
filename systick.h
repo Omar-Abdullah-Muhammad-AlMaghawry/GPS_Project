@@ -7,5 +7,5 @@
 void SYSTICK_init(void);
 void SYSTICK_delayClk(uint32_t time);
 void SYSTICK_delayMil(uint32_t time);
-void SYSTICK_delaySecond(uint32_t time);
+void SYSTICK_delaySec(uint32_t time);
 #endif

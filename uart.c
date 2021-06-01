@@ -3,6 +3,8 @@
 /*
 NAME: INIT UART for gbs
 Description : initialization the UART
+in : none
+out : none
 */  	
 void UART_init(const UartConfig * conf){
 	float UARTSysClk = 16000000;
@@ -11,49 +13,49 @@ void UART_init(const UartConfig * conf){
 	int IBRD = BRD;
 	int FBRD=(((((float)BRD - (float)IBRD)* 64)+ 0.5));
 	int c = 0;
-	SYSCTL_RCGCUART_R |= (1<<(conf->uartType)); // enable uart2
-	SYSCTL_RCGCGPIO_R |=(1<<conf->gpioPort); // enable portd
+	SYSCTL_RCGCUART_R |= (1<<(conf->uartType)); // enable uart
+	SYSCTL_RCGCGPIO_R |=(1<<conf->gpioPort); // enable port
 	//while((SYSCTL_PRGPIO_R&(1<<conf->gpioPort))==0);
 	for( c=0;c<5;c++);
 	c=0;
 	switch (conf->uartType){		
 		case UART_0:
 			
-			GPIO_PORTA_AFSEL_R |= (1<<0)|(1<<1);//GPIO_PCTL_PD6_U2RX|GPIO_PCTL_PD7_U2TX;
-			GPIO_PORTA_PCTL_R = (GPIO_PORTA_PCTL_R&0xFFFFFF00)|0x00000011; //choose alternative fn as U2Rx &U2Tx
-			GPIO_PORTA_DEN_R |=(1<<0)|(1<<1); // degit enable for 6 & 7
+			GPIO_PORTA_AFSEL_R |= (1<<0)|(1<<1);//enable alternative fn;
+			GPIO_PORTA_PCTL_R = (GPIO_PORTA_PCTL_R&0xFFFFFF00)|0x00000011; //choose alternative fn as UNRx &UnTx
+			GPIO_PORTA_DEN_R |=(1<<0)|(1<<1); // degit enable for 0 & 1
 			GPIO_PORTA_AMSEL_R &=~(1<<1)&~(1<<0);
 			UART0_CTL_R &=~UART_CTL_UARTEN; // denable
-			UART0_IBRD_R =IBRD; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
-			UART0_FBRD_R =FBRD; //float baud rate 0.833333*64 = 53.3333
+			UART0_IBRD_R =IBRD; //integer baud rate 
+			UART0_FBRD_R =FBRD; //float baud rate 
 		if(conf->noOfStopBits == 0)
 				switch(conf->noOfBits){
 					case fiveBits:
-						UART0_LCRH_R|=0x10; // 8 bit & fifo enable
+						UART0_LCRH_R|=0x10; // 5 bit & fifo enable & one stop bit
 					break;
 					case sexBits:
-						UART0_LCRH_R|=0x30; // 8 bit & fifo enable
+						UART0_LCRH_R|=0x30; // 6 bit & fifo enable & one stop bit
 					break;
 					case sevenBits:
-						UART0_LCRH_R|=0x50; // 8 bit & fifo enable
+						UART0_LCRH_R|=0x50; // 7 bit & fifo enable & one stop bit
 					break;
 					case eightBits:
-						UART0_LCRH_R|=0x70; // 8 bit & fifo enable
+						UART0_LCRH_R|=0x70; // 8 bit & fifo enable & one stop bit
 					break;
 				}
 			else			
 				switch(conf->noOfBits){			
 					case fiveBits:
-						UART0_LCRH_R|=0x18; // 8 bit & fifo enable
+						UART0_LCRH_R|=0x18; // 5 bit & fifo enable & 2 stop bits
 					break;
 					case sexBits:
-						UART0_LCRH_R|=0x38; // 8 bit & fifo enable
+						UART0_LCRH_R|=0x38; // 6 bit & fifo enable & 2 stop bit
 					break;
 					case sevenBits:
-						UART0_LCRH_R|=0x58; // 8 bit & fifo enable
+						UART0_LCRH_R|=0x58; // 7 bit & fifo enable & 2 stop bit
 					break;
 					case eightBits:
-						UART0_LCRH_R|=0x78; // 8 bit & fifo enable
+						UART0_LCRH_R|=0x78; // 8 bit & fifo enable & 2 stop bit
 					break;			
 				}
 				UART0_CTL_R |= UART_CTL_RXE | UART_CTL_TXE; // enable tx & rx
@@ -61,31 +63,31 @@ void UART_init(const UartConfig * conf){
 		break;
 		case UART_1:
 			if(conf->gpioPort == 1){
-				GPIO_PORTB_AFSEL_R |= (1<<0)|(1<<1);//GPIO_PCTL_PD6_U2RX|GPIO_PCTL_PD7_U2TX;
-				GPIO_PORTB_PCTL_R = (GPIO_PORTB_PCTL_R&0xFFFFFF00)|0x00000011; //choose alternative fn as U2Rx &U2Tx
-				GPIO_PORTB_DEN_R |=(1<<0)|(1<<1); // degit enable for 6 & 7
+				GPIO_PORTB_AFSEL_R |= (1<<0)|(1<<1);
+				GPIO_PORTB_PCTL_R = (GPIO_PORTB_PCTL_R&0xFFFFFF00)|0x00000011;
+				GPIO_PORTB_DEN_R |=(1<<0)|(1<<1); 
 				GPIO_PORTB_AMSEL_R &=~(1<<0)&~(1<<1);
 			}
 			else if(conf->gpioPort == 2){
-				GPIO_PORTC_AFSEL_R |= (1<<0)|(1<<1);//GPIO_PCTL_PD6_U2RX|GPIO_PCTL_PD7_U2TX;
-				GPIO_PORTC_PCTL_R = (GPIO_PORTC_PCTL_R&0xFF00FFFF)+0x00110000; //choose alternative fn as U2Rx &U2Tx
-				GPIO_PORTC_DEN_R |=(1<<1)|(1<<0); // degit enable for 6 & 7
+				GPIO_PORTC_AFSEL_R |= (1<<0)|(1<<1);
+				GPIO_PORTC_PCTL_R = (GPIO_PORTC_PCTL_R&0xFF00FFFF)+0x00110000; //choose alternative fn as UnRx &UnTx
+				GPIO_PORTC_DEN_R |=(1<<1)|(1<<0); // degit enable for 1 & 0
 				GPIO_PORTC_AMSEL_R &=~(1<<0)&~(1<<1);
 			}			
 			UART1_CTL_R &=~UART_CTL_UARTEN; // denable			
-			UART1_IBRD_R =IBRD; //integer baud rate 80,000,000 /(16*9600) ** for gps 9600(default)
-			UART1_FBRD_R =FBRD; //float baud rate 0.833333*64 = 53.3333
+			UART1_IBRD_R =IBRD; //integer baud rate 
+			UART1_FBRD_R =FBRD; //float baud rate 
 			
 			if(conf->noOfStopBits == 0)
 				switch(conf->noOfBits){
 					case fiveBits:
-						UART1_LCRH_R|=0x10; // 8 bit & fifo enable
+						UART1_LCRH_R|=0x10; // 5 bit & fifo enable & one stop bit
 					break;
 					case sexBits:
-						UART1_LCRH_R|=0x30; // 8 bit & fifo enable
+						UART1_LCRH_R|=0x30; // 6 bit & fifo enable & one stop bit
 					break;
 					case sevenBits:
-						UART1_LCRH_R|=0x50; // 8 bit & fifo enable
+						UART1_LCRH_R|=0x50; // 7 bit & fifo enable & one stop bit
 					break;
 					case eightBits:
 						UART1_LCRH_R|=0x70; // 8 bit & fifo enable
