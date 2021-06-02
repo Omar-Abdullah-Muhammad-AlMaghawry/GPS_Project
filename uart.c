@@ -365,8 +365,8 @@ void UART_init(const UartConfig * conf){
 }
 
 /*
-NAME: recive UART0
-Description : recieving byte from the UART0
+NAME: UART_recieveChar
+Description : recieving byte from the UART
 in : null
 out : uint8_t // Byte
 */
