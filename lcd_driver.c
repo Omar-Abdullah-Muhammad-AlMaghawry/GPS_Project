@@ -71,6 +71,7 @@ void lcd_select_line(uint8_t line){
 	else if (line == 4) lcd_cmd(0xD0);
 }
 
+/*
 int main(){
 	lcd_cmd(0x01);
 	//while(1){
@@ -82,8 +83,9 @@ int main(){
 		//lcd_write_char('b');
 		//delay_micro(500);
 	//}
-}
+}*/
+/*
 void SystemInit(){
 	lcd_init();
 	main();
-}
+}*/

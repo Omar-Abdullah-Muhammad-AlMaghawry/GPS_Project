@@ -1,0 +1,1 @@
+.\abdallah.o: abdallah.c
