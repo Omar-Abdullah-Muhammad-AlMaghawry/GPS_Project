@@ -7,3 +7,77 @@ D:\College\3rd CSE\Microprocessors Based Systems\GPS_Project\GPS_Project.uvproj
 Project File Date:  06/04/2021
 
 <h2>Output:</h2>
+Rebuild target 'Target 1'
+assembling startup_TM4C123.s...
+compiling lcd_driver.c...
+compiling main.c...
+main.c(40): warning:  #111-D: statement is unreachable
+        return 0 ;
+main.c(7): warning:  #177-D: variable "c" was declared but never referenced
+        int     c=0;
+main.c: 2 warnings, 0 errors
+compiling uart.c...
+uart.c(377): warning:  #111-D: statement is unreachable
+                                break;
+uart.c(381): warning:  #111-D: statement is unreachable
+                                break;
+uart.c(385): warning:  #111-D: statement is unreachable
+                                break;
+uart.c(389): warning:  #111-D: statement is unreachable
+                                break;
+uart.c(393): warning:  #111-D: statement is unreachable
+                                break;
+uart.c(397): warning:  #111-D: statement is unreachable
+                                break;          
+uart.c(401): warning:  #111-D: statement is unreachable
+                                break;
+uart.c(405): warning:  #111-D: statement is unreachable
+                                break;
+uart.c(407): warning:  #940-D: missing return statement at end of non-void function "UART_recieveChar"
+  }
+uart.c: 9 warnings, 0 errors
+compiling abdallah.c...
+compiling coordinates_parser.c...
+coordinates_parser.c(45): error:  #167: argument of type "unsigned char (*)[9]" is incompatible with parameter of type "const char *restrict"
+                                                                                *longitude = strtod(&latitude_char, NULL);            //convert char to double or  float
+coordinates_parser.c(54): error:  #167: argument of type "unsigned char (*)[9]" is incompatible with parameter of type "const char *restrict"
+                                                                                * latitude = strtod(&latitude_char, NULL);   
+coordinates_parser.c(66): warning:  #111-D: statement is unreachable
+        return true;
+coordinates_parser.c(67): warning:  #1-D: last line of file ends without a newline
+  }
+coordinates_parser.c(18): warning:  #550-D: variable "longitude_char" was set but never used
+        unsigned char longitude_char[10];
+coordinates_parser.c: 3 warnings, 2 errors
+".\GPS_Project.axf" - 2 Error(s), 14 Warning(s).
+Target not created
+                                      latitude= strtod(latitude_char, NULL);   
+coordinates_parser.c(62): warning:  #111-D: statement is unreachable
+        return true;
+coordinates_parser.c(63): warning:  #1-D: last line of file ends without a newline
+  }
+coordinates_parser.c(14): warning:  #550-D: variable "longitude_char" was set but never used
+        unsigned char longitude_char[10];
+coordinates_parser.c: 5 warnings, 2 errors
+".\GPS_Project.axf" - 2 Error(s), 16 Warning(s).
+Target not created
+ar[10];
+coordinates_parser.c: 5 warnings, 2 errors
+"coordinates_parser.c" - 2 Error(s), 5 Warning(s).
+compiling coordinates_parser.c...
+coordinates_parser.c(41): warning:  #167-D: argument of type "unsigned char *" is incompatible with parameter of type "const char *restrict"
+                                                                                longitude= strtod(latitude_char, NULL);            //convert char to double or  float
+coordinates_parser.c(41): error:  #513: a value of type "double" cannot be assigned to an entity of type "float *"
+                                                                                longitude= strtod(latitude_char, NULL);            //convert char to double or  float
+coordinates_parser.c(50): warning:  #167-D: argument of type "unsigned char *" is incompatible with parameter of type "const char *restrict"
+                                                                                latitude= strtod(latitude_char, NULL);   
+coordinates_parser.c(50): error:  #513: a value of type "double" cannot be assigned to an entity of type "float *"
+                                                                                latitude= strtod(latitude_char, NULL);   
+coordinates_parser.c(62): warning:  #111-D: statement is unreachable
+        return true;
+coordinates_parser.c(63): warning:  #1-D: last line of file ends without a newline
+  }
+coordinates_parser.c(14): warning:  #550-D: variable "longitude_char" was set but never used
+        unsigned char longitude_char[10];
+coordinates_parser.c: 5 warnings, 2 errors
+"coordinates_parser.c" - 2 Error(s), 5 Warning(s).

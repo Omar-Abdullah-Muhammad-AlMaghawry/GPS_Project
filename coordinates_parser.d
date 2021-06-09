@@ -1,0 +1,13 @@
+.\coordinates_parser.o: coordinates_parser.c
+.\coordinates_parser.o: C:\Keil\ARM\ARMCC\bin\..\include\stdio.h
+.\coordinates_parser.o: C:\Keil\ARM\ARMCC\bin\..\include\stdbool.h
+.\coordinates_parser.o: uart.h
+.\coordinates_parser.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\coordinates_parser.o: tm4c123gh6pm_.h
+.\coordinates_parser.o: C:\Keil\ARM\Inc\TI\TM4C123\tm4c123gh6pm.h
+.\coordinates_parser.o: C:\Keil\ARM\CMSIS\Include\core_cm4.h
+.\coordinates_parser.o: C:\Keil\ARM\CMSIS\Include\core_cmInstr.h
+.\coordinates_parser.o: C:\Keil\ARM\CMSIS\Include\core_cmFunc.h
+.\coordinates_parser.o: C:\Keil\ARM\CMSIS\Include\core_cm4_simd.h
+.\coordinates_parser.o: C:\Keil\ARM\Inc\TI\TM4C123\system_TM4C123.h
+.\coordinates_parser.o: C:\Keil\ARM\ARMCC\bin\..\include\stdlib.h

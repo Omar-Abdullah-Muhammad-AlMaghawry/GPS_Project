@@ -48,46 +48,46 @@ ARM Macro Assembler    Page 1
    30 00000000         ;   <o> Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
    31 00000000         ; </h>
    32 00000000         
-   33 00000000 00002000 
+   33 00000000 00000200 
                        Stack_Size
-                               EQU              0x00002000
+                               EQU              0x00000200
    34 00000000         
    35 00000000                 AREA             STACK, NOINIT, READWRITE, ALIGN
 =3
    36 00000000         Stack_Mem
                                SPACE            Stack_Size
-   37 00002000         __initial_sp
-   38 00002000         
-   39 00002000         
-   40 00002000         ; <h> Heap Configuration
-   41 00002000         ;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
-   42 00002000         ; </h>
-   43 00002000         
+   37 00000200         __initial_sp
+   38 00000200         
+   39 00000200         
+   40 00000200         ; <h> Heap Configuration
+   41 00000200         ;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
+   42 00000200         ; </h>
+   43 00000200         
 
 
 
 ARM Macro Assembler    Page 2 
 
 
-   44 00002000 00000200 
+   44 00000200 00000000 
                        Heap_Size
-                               EQU              0x00000200
-   45 00002000         
-   46 00002000                 AREA             HEAP, NOINIT, READWRITE, ALIGN=
+                               EQU              0x00000000
+   45 00000200         
+   46 00000200                 AREA             HEAP, NOINIT, READWRITE, ALIGN=
 3
    47 00000000         __heap_base
    48 00000000         Heap_Mem
                                SPACE            Heap_Size
-   49 00000200         __heap_limit
-   50 00000200         
-   51 00000200         
-   52 00000200                 PRESERVE8
-   53 00000200                 THUMB
-   54 00000200         
-   55 00000200         
-   56 00000200         ; Vector Table Mapped to Address 0 at Reset
-   57 00000200         
-   58 00000200                 AREA             RESET, DATA, READONLY
+   49 00000000         __heap_limit
+   50 00000000         
+   51 00000000         
+   52 00000000                 PRESERVE8
+   53 00000000                 THUMB
+   54 00000000         
+   55 00000000         
+   56 00000000         ; Vector Table Mapped to Address 0 at Reset
+   57 00000000         
+   58 00000000                 AREA             RESET, DATA, READONLY
    59 00000000                 EXPORT           __Vectors
    60 00000000                 EXPORT           __Vectors_End
    61 00000000                 EXPORT           __Vectors_Size
@@ -1224,8 +1224,8 @@ ARM Macro Assembler    Page 19
   952 000000F4         
   953 000000F4 4804            LDR              R0, =  Heap_Mem
   954 000000F6 4905            LDR              R1, =(Stack_Mem + Stack_Size)
-  955 000000F8 4A05            LDR              R2, = (Heap_Mem +  Heap_Size)
-  956 000000FA 4B06            LDR              R3, = Stack_Mem
+  955 000000F8 4A03            LDR              R2, = (Heap_Mem +  Heap_Size)
+  956 000000FA 4B05            LDR              R3, = Stack_Mem
   957 000000FC 4770            BX               LR
   958 000000FE         
   959 000000FE 00 00           ALIGN
@@ -1243,7 +1243,6 @@ ARM Macro Assembler    Page 20
               00000000 
               00000000 
               00000000 
-              00002000 
               00000200 
               00000000 
 Command Line: --debug --xref --cpu=Cortex-M4 --apcs=interwork --depend=.\startu
@@ -1273,7 +1272,7 @@ Symbol: Stack_Mem
       At line 954 in file startup_TM4C123.s
       At line 956 in file startup_TM4C123.s
 
-__initial_sp 00002000
+__initial_sp 00000200
 
 Symbol: __initial_sp
    Definitions
@@ -1313,7 +1312,7 @@ Symbol: __heap_base
    Uses
       None
 Comment: __heap_base unused
-__heap_limit 00000200
+__heap_limit 00000000
 
 Symbol: __heap_limit
    Definitions
@@ -2554,7 +2553,7 @@ Comment: __user_initial_stackheap used once
 ARM Macro Assembler    Page 1 Alphabetic symbol ordering
 Absolute symbols
 
-Heap_Size 00000200
+Heap_Size 00000000
 
 Symbol: Heap_Size
    Definitions
@@ -2563,7 +2562,7 @@ Symbol: Heap_Size
       At line 48 in file startup_TM4C123.s
       At line 955 in file startup_TM4C123.s
 
-Stack_Size 00002000
+Stack_Size 00000200
 
 Symbol: Stack_Size
    Definitions
