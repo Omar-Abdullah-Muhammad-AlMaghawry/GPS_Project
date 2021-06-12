@@ -10,3 +10,5 @@
 .\main.o: C:\Keil\ARM\Inc\TI\TM4C123\system_TM4C123.h
 .\main.o: lcd_driver.h
 .\main.o: systick.h
+.\main.o: portfinterrupt.h
+.\main.o: C:\Keil\ARM\ARMCC\bin\..\include\stdio.h

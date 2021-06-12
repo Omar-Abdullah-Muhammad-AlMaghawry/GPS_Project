@@ -1,0 +1,11 @@
+.\portfinterrupt.o: portfinterrupt.c
+.\portfinterrupt.o: portfinterrupt.h
+.\portfinterrupt.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\portfinterrupt.o: C:\Keil\ARM\ARMCC\bin\..\include\stdio.h
+.\portfinterrupt.o: tm4c123gh6pm_O.h
+.\portfinterrupt.o: C:\Keil\ARM\Inc\TI\TM4C123\tm4c123gh6pm.h
+.\portfinterrupt.o: C:\Keil\ARM\CMSIS\Include\core_cm4.h
+.\portfinterrupt.o: C:\Keil\ARM\CMSIS\Include\core_cmInstr.h
+.\portfinterrupt.o: C:\Keil\ARM\CMSIS\Include\core_cmFunc.h
+.\portfinterrupt.o: C:\Keil\ARM\CMSIS\Include\core_cm4_simd.h
+.\portfinterrupt.o: C:\Keil\ARM\Inc\TI\TM4C123\system_TM4C123.h

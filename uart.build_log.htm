@@ -4,7 +4,7 @@
 <h1>µVision Build Log</h1>
 <h2>Project:</h2>
 D:\College\3rd Comp. and Sys\2nd Terms\Microprocessor Based System\micro\testStudy\UART\uart.uvproj
-Project File Date:  05/30/2021
+Project File Date:  06/12/2021
 
 <h2>Output:</h2>
 Rebuild target 'Target 1'
@@ -29,43 +29,49 @@ uart.c(407): warning:  #111-D: statement is unreachable
 uart.c(409): warning:  #940-D: missing return statement at end of non-void function "UART_recieveChar"
   }
 uart.c: 9 warnings, 0 errors
-compiling main.c...
-systick.h(11): warning:  #1-D: last line of file ends without a newline
+compiling portfinterrupt.c...
+portfinterrupt.h(10): warning:  #1-D: last line of file ends without a newline
   #endif
-main.c(40): warning:  #111-D: statement is unreachable
-        return 0 ;
-main.c(7): warning:  #177-D: variable "c" was declared but never referenced
-        int     c=0;
-main.c: 3 warnings, 0 errors
-compiling lcd_driver.c...
-compiling portf.c...
+portfinterrupt.c(33): warning:  #1-D: last line of file ends without a newline
+  }
+portfinterrupt.c: 2 warnings, 0 errors
 compiling systick.c...
 systick.h(11): warning:  #1-D: last line of file ends without a newline
   #endif
 systick.c(54): warning:  #1-D: last line of file ends without a newline
   }
 systick.c: 2 warnings, 0 errors
+compiling main.c...
+systick.h(11): warning:  #1-D: last line of file ends without a newline
+  #endif
+portfinterrupt.h(10): warning:  #1-D: last line of file ends without a newline
+  #endif
+main.c(44): warning:  #111-D: statement is unreachable
+        return 0 ;
+main.c(8): warning:  #177-D: variable "c" was declared but never referenced
+        int     c=0;
+main.c: 4 warnings, 0 errors
+compiling lcd_driver.c...
 linking...
-Program Size: Code=6656 RO-data=660 RW-data=0 ZI-data=608  
-FromELF: creating hex file...
-".\uart.axf" - 0 Error(s), 14 Warning(s).
+Program Size: Code=6960 RO-data=660 RW-data=0 ZI-data=608  
+".\uart.axf" - 0 Error(s), 17 Warning(s).
 Load "D:\\College\\3rd Comp. and Sys\\2nd Terms\\Microprocessor Based System\\micro\\testStudy\\UART\\uart.axf" 
 Connecting: Mode=JTAG, Speed=1000000Hz
 Erase Done.
 Programming Done.
 Verify OK.
-Study\\UART\\uart.axf" 
-Connecting: Mode=JTAG, Speed=1000000Hz
+56: cannot open file
+Error: Flash Download failed  -  Could not load file 'D:\College\3rd Comp. and Sys\2nd Terms\Microprocessor Based System\micro\testStudy\UART\uart.axf'
+Load "D:\\College\\3rd Comp. and Sys\\2nd Terms\\Microprocessor Based System\\micro\\testStudy\\UART\\uart.axf" 
+_____^
+*** error 56: cannot open file
+Error: Flash Download failed  -  Could not load file 'D:\College\3rd Comp. and Sys\2nd Terms\Microprocessor Based System\micro\testStudy\UART\uart.axf'
+: Mode=JTAG, Speed=1000000Hz
 Erase Done.
 Programming Done.
 Verify OK.
-ash Download failed  -  Target DLL has been cancelled
 Load "D:\\College\\3rd Comp. and Sys\\2nd Terms\\Microprocessor Based System\\micro\\testStudy\\UART\\uart.axf" 
 Connecting: Mode=JTAG, Speed=1000000Hz
 Erase Done.
 Programming Done.
 Verify OK.
-eturn statement at end of non-void function "UART_recieve"
-  }
-uart.c: 9 warnings, 0 errors
-"uart.c" - 0 Error(s), 9 Warning(s).
