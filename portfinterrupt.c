@@ -29,5 +29,5 @@ void GPIOF_Handler(void){
 }
 }
 void EnableInterrupts(void){
-__asm ("CPSIE I")//set I = 0 to enable
+__asm ("CPSIE I");//set I = 0 to enable
 }

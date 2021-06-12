@@ -12,3 +12,4 @@
 .\main.o: systick.h
 .\main.o: portfinterrupt.h
 .\main.o: C:\Keil\ARM\ARMCC\bin\..\include\stdio.h
+.\main.o: timerainter.h

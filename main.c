@@ -2,6 +2,7 @@
 #include "lcd_driver.h"
 #include "systick.h"
 #include "portfinterrupt.h"
+#include "timerainter.h"
 int main(void){
 	uint8_t test=0;
 	char * testS="$PMOTG,RMC,000500";
@@ -10,7 +11,8 @@ int main(void){
 	UartConfig confUartTermBluetooth={UART_5,PORTE,oneStop,eightBits,9600};
 	UartConfig confUartGps={UART_4,PORTC,oneStop,eightBits,9600};
 	PORTFINTER_init();
-	GPIO_PORTF_DATA_R|=(1<<2);
+	TIMER0A_initPeriodicInt_Mil(100);
+	//GPIO_PORTF_DATA_R|=(1<<2);
 	lcd_init();
 	lcd_select_line(1);
 	lcd_write_line("f 00");

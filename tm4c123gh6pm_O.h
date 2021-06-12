@@ -12854,6 +12854,7 @@
 #define NVIC_FPDSC_RMODE_RM     0x00800000  // Round towards Minus Infinity
                                             // (RM) mode
 #define NVIC_FPDSC_RMODE_RZ     0x00C00000  // Round towards Zero (RZ) mode
+void EnableInterrupts(void);  // Enable interrupts
 
 //*****************************************************************************
 //
