@@ -8,53 +8,89 @@
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
 <style>
 body { margin: 0; padding: 0; }
-#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+#map { position: absolute; top: 0; bottom: 0; width: 80%; }
+.container {float: right;}
+#inputfile {align-items: right;}
 </style>
 </head>
 <body>
-<div id="map"></div>
-<script>
-    var coordinates = [
-        [31.27985458082252, 30.06427900022176],
-        [31.279728517007285, 30.06423489446542],
-        [31.279316797951164, 30.064110701835375]
-    ];
     
-	mapboxgl.accessToken = 'pk.eyJ1IjoiaS1hYmR1bGxhaC1pIiwiYSI6ImNrcDRjMWJ4ZDI1N2gyeW1jdWZjeW55ajYifQ.SVNOUaUrejz5scGIQgXHEw';
-    var map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v11',
-        center: [31.278220, 30.064984],
-        zoom: 16
-    });
+    <div class="container">
+        <input type="file" name="inputfile" id="inputfile">
+    </div>
+    <div id="map"></div>   
+    
+    
+    <script type="text/javascript">
+        let coordinates_s = new Array();
 
-    map.on('load', function () {
-        map.addSource('route', {
-            'type': 'geojson',
-            'data': {
-                'type': 'Feature',
-                'properties': {},
-                'geometry': {
-                    'type': 'LineString',
-                    'coordinates': coordinates
+        mapboxgl.accessToken = 'pk.eyJ1IjoiaS1hYmR1bGxhaC1pIiwiYSI6ImNrcDRjMWJ4ZDI1N2gyeW1jdWZjeW55ajYifQ.SVNOUaUrejz5scGIQgXHEw';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [31.278220, 30.064984],
+            // center: [coordinates_s[0][0], coordinates_s[0][1]],
+            zoom: 16
+        });
+
+		document.getElementById('inputfile')
+			.addEventListener('change', function() {
+			
+			var fr=new FileReader();
+			// Map update is here
+            fr.onload=function(){                
+                let resultArray = (fr.result).split("\r\n");
+                let i;
+                for (i = 0; i < resultArray.length; i++) {
+                    let parsed_item = resultArray[i].split(",");
+                    let obj = [parseFloat(parsed_item[1]), parseFloat(parsed_item[0])];
+                    console.log(obj);
+                    coordinates_s.push(obj);
                 }
+                console.log(coordinates_s);
+			
+                mapboxgl.accessToken = 'pk.eyJ1IjoiaS1hYmR1bGxhaC1pIiwiYSI6ImNrcDRjMWJ4ZDI1N2gyeW1jdWZjeW55ajYifQ.SVNOUaUrejz5scGIQgXHEw';
+                var map = new mapboxgl.Map({
+                    container: 'map',
+                    style: 'mapbox://styles/mapbox/streets-v11',
+                    center: [coordinates_s[0][0], coordinates_s[0][1]],
+                    zoom: 16
+                });
+
+                map.on('load', function () {
+                    map.addSource('route', {
+                        'type': 'geojson',
+                        'data': {
+                            'type': 'Feature',
+                            'properties': {},
+                            'geometry': {
+                                'type': 'LineString',
+                                'coordinates': coordinates_s    
+                            }
+                        }
+                    });
+                    map.addLayer({
+                        'id': 'route',
+                        'type': 'line',
+                        'source': 'route',
+                        'layout': {
+                            'line-join': 'round',
+                            'line-cap': 'round'
+                        },
+                        'paint': {
+                            'line-color': '#C70039 ',
+                            'line-width': 8
+                        }
+                    });
+                });
+            
+            
             }
-        });
-        map.addLayer({
-            'id': 'route',
-            'type': 'line',
-            'source': 'route',
-            'layout': {
-                'line-join': 'round',
-                'line-cap': 'round'
-            },
-            'paint': {
-                'line-color': '#C70039 ',
-                'line-width': 8
-            }
-        });
-    });
-</script>
+			
+			fr.readAsText(this.files[0]);
+		})
+    </script>
+
 
 </body>
 </html>
