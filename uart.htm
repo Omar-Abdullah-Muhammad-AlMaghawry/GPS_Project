@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\uart.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\uart.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Sun Jun 13 00:47:09 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Sun Jun 13 15:00:37 2021
 <BR><P>
 <H3>Maximum Stack Usage =        120 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1269,7 +1269,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[86]"></a>main</STRONG> (Thumb, 142 bytes, Stack size 24 bytes, main.o(.text))
+<P><STRONG><a name="[86]"></a>main</STRONG> (Thumb, 144 bytes, Stack size 24 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = main &rArr; UART_init &rArr; __aeabi_d2iz
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_write_line
@@ -1341,15 +1341,15 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[9e]"></a>TIMER0A_initPeriodicInt_Mil</STRONG> (Thumb, 126 bytes, Stack size 8 bytes, timerainter.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = TIMER0A_initPeriodicInt_Mil
+<P><STRONG><a name="[9e]"></a>TIMER0A_initPeriodicInt_Mil</STRONG> (Thumb, 386 bytes, Stack size 16 bytes, timerainter.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = TIMER0A_initPeriodicInt_Mil
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EnableInterrupts
 </UL>
 <BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[20]"></a>TIMER0A_Handler</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, timerainter.o(.text))
+<P><STRONG><a name="[20]"></a>TIMER0A_Handler</STRONG> (Thumb, 110 bytes, Stack size 0 bytes, timerainter.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_tm4c123.o(RESET)
 </UL>
 <P><STRONG><a name="[db]"></a>TIMER0A_initRtsInt</STRONG> (Thumb, 54 bytes, Stack size 0 bytes, timerainter.o(.text), UNUSED)

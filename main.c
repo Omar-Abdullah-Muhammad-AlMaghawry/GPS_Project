@@ -11,7 +11,7 @@ int main(void){
 	UartConfig confUartTermBluetooth={UART_5,PORTE,oneStop,eightBits,9600};
 	UartConfig confUartGps={UART_4,PORTC,oneStop,eightBits,9600};
 	PORTFINTER_init();
-	TIMER0A_initPeriodicInt_Mil(100);
+	TIMER0A_initPeriodicInt_Mil(100,TIMER_0);
 	//GPIO_PORTF_DATA_R|=(1<<2);
 	lcd_init();
 	lcd_select_line(1);
